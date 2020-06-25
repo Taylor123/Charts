@@ -538,9 +538,10 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         {
             return
         }
-        
-        if recognizer.state == NSUIGestureRecognizerState.ended
-        {
+			
+			if recognizer.state == NSUIGestureRecognizerState.began {
+				delegate?.chartGestureStart?(self)
+			} else if recognizer.state == NSUIGestureRecognizerState.ended {
             if !isHighLightPerTapEnabled { return }
             
             let h = getHighlightByTouchPoint(recognizer.location(in: self))
@@ -565,8 +566,9 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             return
         }
         
-        if recognizer.state == NSUIGestureRecognizerState.ended
-        {
+			if recognizer.state == NSUIGestureRecognizerState.began {
+				delegate?.chartGestureStart?(self)
+			} else if recognizer.state == NSUIGestureRecognizerState.ended {
             if _data !== nil && _doubleTapToZoomEnabled && (data?.entryCount ?? 0) > 0
             {
                 var location = recognizer.location(in: self)
@@ -621,6 +623,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     }
                 }
             }
+					delegate?.chartGestureStart?(self)
         }
         else if recognizer.state == NSUIGestureRecognizerState.ended ||
             recognizer.state == NSUIGestureRecognizerState.cancelled
@@ -741,6 +744,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 
                 _isDragging = false
             }
+					delegate?.chartGestureStart?(self)
         }
         else if recognizer.state == NSUIGestureRecognizerState.changed
         {

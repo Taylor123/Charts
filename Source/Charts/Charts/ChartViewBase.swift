@@ -36,6 +36,9 @@ public protocol ChartViewDelegate
 	
     /// Called when a user stops scaling the chart with pinch gesture
     @objc optional func chartViewDidEndPinchGesture(_ chartView: ChartViewBase)
+	
+	/// Called when a user stops scaling the chart with pinch gesture
+	@objc optional func chartGestureStart(_ chartView: ChartViewBase)
     
     // Called when nothing has been selected or an "un-select" has been made.
     @objc optional func chartValueNothingSelected(_ chartView: ChartViewBase)
